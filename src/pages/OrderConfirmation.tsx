@@ -73,6 +73,7 @@ const OrderConfirmation = () => {
 
         if (res.data.success && res.data.code === 'PAYMENT_SUCCESS') {
           setStatus('SUCCESS');
+          console.log('dd')
           toast.success('Payment Successful!');
           clearCart();
         } else {

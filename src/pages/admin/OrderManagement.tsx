@@ -90,9 +90,12 @@ ${order.items
   )
   .join('\n')}
 
+      ---------------------------------
+      Sub Total            :₹ ${subtotal.toFixed(2)}
+      ---------------------------------
       Handling Charges(4%) : ₹${handlingCharges.toFixed(2)}
       ---------------------------------
-      Total Amount   : ₹${order.total.toFixed(2)}
+      Total Amount         : ₹${order.total.toFixed(2)}
       ---------------------------------
       Thank You for Choosing G3 Cinema!
 `;
