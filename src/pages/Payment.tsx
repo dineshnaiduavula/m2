@@ -10,6 +10,12 @@ import CryptoJS from 'crypto-js';
 import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import LoadingSpinner from '../components/LoadingSpinner';
+
+declare global {
+  interface Window {
+    phonepe: any;
+  }
+}
 const Payment = () => {
   const [paymentStatus, setPaymentStatus] = useState<string | null>(null); // State to track payment status
     const [loading, setLoading] = useState(false); // State for loading indicator
@@ -57,6 +63,7 @@ const Payment = () => {
       name: data.name,
       amount: totalAmount * 100, // Amount in paise,
      redirectUrl: `${window.location.origin}/order-confirmation`,
+    //  redirectUrl:'http://localhost:5173/order-confirmation',
       redirectMode: 'POST',
       mobileNumber: data.number,
       paymentInstrument: {
@@ -114,12 +121,14 @@ await updateDoc(docRef, {id: newId, date: currentDate,});
 const  user={items: cart, total: totalAmount, customerName: name, customerPhone: phone,
   seatNumber, screen, orderId:newId,
      createdAt: new Date().toISOString()}
-  const existingUsers = JSON.parse(sessionStorage.getItem('users') || '[]');
+  const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
   existingUsers.push(user);
-  sessionStorage.setItem('users', JSON.stringify(existingUsers));
+  localStorage.setItem('users', JSON.stringify(existingUsers));
      clearCart();
 
         window.location.href = res.data.data.instrumentResponse.redirectInfo.url;
+       // window.open(res.data.data.instrumentResponse.redirectInfo.url, '_blank', 'width=800,height=600');
+      localStorage.setItem('transactionId',data.transactionId);
         toast.success('Payment initiated successfully! Redirecting...');
 
 

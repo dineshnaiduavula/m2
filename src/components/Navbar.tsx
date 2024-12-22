@@ -24,7 +24,7 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const z = sessionStorage.getItem('users');
+    const z = localStorage.getItem('users');
     setHasOrders(!!z && JSON.parse(z).length > 0);
     const handleScroll = () => {
       const currentScrollY = window.scrollY;

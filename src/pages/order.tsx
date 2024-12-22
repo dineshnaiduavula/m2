@@ -6,7 +6,7 @@ const Order: React.FC = () => {
   const navigate = useNavigate();
 
   // Retrieve and parse sessionStorage data
-  const z = sessionStorage.getItem('users');
+  const z = localStorage.getItem('users');
   const orders = z ? JSON.parse(z) : [];
 
   useEffect(() => {
