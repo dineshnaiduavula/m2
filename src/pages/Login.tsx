@@ -12,7 +12,7 @@ function Login() {
     name: '',
     phone: '',
     seatNumber: '',
-    screen: String(SCREENS[0])
+    screen: String()
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -70,7 +70,7 @@ function Login() {
             />
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">Screen</label>
             <select
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#fe0002] focus:border-[#fe0002]"
@@ -81,7 +81,28 @@ function Login() {
                 <option key={screen} value={screen}>{screen}</option>
               ))}
             </select>
-          </div>
+          </div> */}
+          <div>
+  <label className="block text-sm font-medium text-gray-700">Screen</label>
+  <div className="mt-1">
+    {SCREENS.map((screen) => (
+      <div key={screen} className="flex items-center">
+        <input
+          type="radio"
+          id={screen}
+          name="screen"
+          value={screen}
+          checked={formData.screen === screen}
+          onChange={(e) => setFormData({ ...formData, screen: e.target.value })}
+          className="h-4 w-4 text-[#fe0002] border-gray-300 focus:ring-[#fe0002]"
+        />
+        <label htmlFor={screen} className="ml-2 block text-sm text-gray-700">
+          {screen}
+        </label>
+      </div>
+    ))}
+  </div>
+</div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700">Seat Number</label>
