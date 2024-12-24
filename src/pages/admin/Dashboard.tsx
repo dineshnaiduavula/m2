@@ -4,7 +4,7 @@ import { LayoutGrid, ClipboardList, CheckSquare, LogOut, Menu as MenuIcon, PlusS
 import MenuManagement from './MenuManagement';
 import OrderManagement from './OrderManagement';
 import CompletedOrders from './CompletedOrders';
-import Manualadd from './manualadd';
+import Manualadd from './Manualadd';
 import { useAuthStore } from '../../store/authStore';
 
 function Dashboard() {
