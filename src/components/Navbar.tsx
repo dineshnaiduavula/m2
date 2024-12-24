@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ShoppingCart, LogOut } from 'lucide-react';
+import { ShoppingCart, LogOut, Clock } from 'lucide-react';
 import { useStore } from '../store/useStore';
 
 function Navbar() {
@@ -67,12 +67,14 @@ function Navbar() {
             </button>
 
             {hasOrders && (
+
         <button
-          onClick={() => navigate('/history')}
-          className="relative p-2 text-gray-600 hover:text-red-600"
-        >
-          Order History
-        </button>
+        onClick={() => navigate('/history')}
+        className="relative flex items-center space-x-2 p-2 text-gray-600 hover:text-red-600"
+      >
+        <Clock size={18} /> {/* Clock Icon */}
+        <span>Order History</span>
+      </button>
       )}
 
             <button
