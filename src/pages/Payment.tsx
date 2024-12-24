@@ -173,6 +173,11 @@ const  user={items: cart, total: totalAmount, customerName: name, customerPhone:
                   ))}
                 </div>
                 <div className="border-t mt-4 pt-4">
+                <div className="flex justify-between text-sm">
+                    <span>Sub Total</span>
+                    <span>₹{(cart.reduce((t, i) => t + i.price * i.quantity, 0)).toFixed(2)}</span>
+                  </div>
+                  <br></br>
                   <div className="flex justify-between text-sm">
                     <span>Handling Charges (4%)</span>
                     <span>₹{(calculateTotal() - cart.reduce((t, i) => t + i.price * i.quantity, 0)).toFixed(2)}</span>
@@ -196,8 +201,13 @@ const  user={items: cart, total: totalAmount, customerName: name, customerPhone:
 
               <div>
                 <p style={{ fontWeight: 'bold', color: 'red', textAlign: 'center' }}>
-                  Wait until your order is confirmed after payment. Don’t reload or exit this page while processing.
+                  <span style={{ fontWeight: 'bold', color: 'darkcyan'}}> Wait until your </span>
+                  order is confirmed  
+                  <span style={{ fontWeight: 'bold', color: 'darkcyan'}}> after </span>
+                  payment<div></div>
+                   Don’t reload/close this page while processing
                 </p>
+                
               </div>
               <button
                 onClick={handlePayment}
@@ -209,7 +219,7 @@ const  user={items: cart, total: totalAmount, customerName: name, customerPhone:
               </button>
 
               <p className="text-sm text-gray-500 text-center">
-        By clicking "Pay with Razorpay", you agree to our{" "}
+        By clicking "Pay with PhonePe", you agree to our{" "}
         <span
           onClick={toggleModal}
           className="text-purple-600 hover:underline cursor-pointer"
@@ -233,83 +243,77 @@ const  user={items: cart, total: totalAmount, customerName: name, customerPhone:
               </button>
             </div>
 
-            {/* Modal Content with Scroll */}
-            <div className="p-4 overflow-y-auto max-h-[60vh]">
-              {/* Replace with your actual terms and conditions */}
-              <p className="text-gray-600 text-sm">
-              <span style={{fontWeight:'bold'}}>OVERVIEW </span><br /><br />
-This website is operated by G3 THEATRES LLP Throughout the site, the terms “we”, “us” and “our” refer to G3 THEATRES LLP . G3 THEATRES LLP offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
-<br />By visiting our site and/ or purchasing something from us, you engage in our “Service” and agree to be bound by the following Terms and Conditions .. <br />These Terms and Conditions apply  to all users of the site, including without limitation users who are browsers, customers, merchants, and/ or contributors of content.
-Please read these Terms and Conditions carefully before accessing or using our website. <br />By accessing or using any part of the site, you agree to be bound by these Terms and Conditions. If you do not agree to all the terms and conditions of this agreement, then you may not access the payment or use any services. 
-Any new features or tools which are added to the current store shall also be subject to the terms and conditions. You can review the most current version of the Terms and Conditions at any time on this page. We reserve the right to update, change or replace any part of these Terms and Conditions by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.
-<br /><br /><span style={{fontWeight:'bold'}}>Terms and Conditions</span>
-              </p>
-              <p className="text-gray-600 text-sm mt-4">
-             <span style={{fontWeight:'500'}}>1. Pricing Policy</span> <br />
-All prices displayed on our website are exclusive of applicable taxes and fees.
-The total bill will include the following charges:
-CGST (Central Goods and Services Tax): 2.5%
-SGST (State Goods and Services Tax): 2.5%
-Handling Fee: 4% (comprising Razorpay charges of 2% and additional platform handling charges of 2%).
-<br /><br />
-<span style={{fontWeight:'500'}}>2. what do we do with your information </span><br />
-When you purchase something from our theatre, as part of the selling process, we collect the personal information you give us such as your name, phone number, seat number and screen to handle the order to reach you while delivering the item/items.
-<br /><br />
-<span style={{fontWeight:'500'}}>3. Payee Information</span><br />
-All payments made on this platform are directed to G3 THEATRES LLP.
-<br /><br />
-<span style={{fontWeight:'500'}}>4. Payment Methods</span><br />
-We use Razorpay for processing payments. We/Razorpay do not store your card data on their servers. The data is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) when processing payment. Your purchase transaction data is only used as long as is necessary to complete your purchase transaction. After that is complete, your purchase transaction information is not saved.
-Our payment gateway adheres to the standards set by PCI-DSS as managed by the PCI Security Standards Council, which is a joint effort of brands like Visa, MasterCard, American Express and Discover.
-PCI-DSS requirements help ensure the secure handling of credit card information by our store and its service providers.
-For more insight, you may also want to read terms and conditions of razorpay on https://razorpay.com
-<br /><br />
-<span style={{fontWeight:'500'}}>5. Transaction Confirmation</span><br />
-After a successful transaction, you will receive a confirmation of your order and payment in the webpage itself. Please ensure that the details provided are accurate.
-<br /><br />
-<span style={{fontWeight:'500'}}>6. Food Items: Health and Safety</span><br />
-All food items listed on this website adhere to strict health and safety standards.
-We source food items from trusted suppliers to ensure quality and compliance with food safety regulations.
-Customers with specific allergies or dietary restrictions are advised to review item details carefully before placing an order.
-<br /><br />
-<span style={{fontWeight:'500'}}>7. Ownership of Food Items</span><br />
-The ownership and responsibility for the preparation and quality of food items lie with G3 THEATRES LLP or its associated partners.
-Any issues related to food preparation or quality will be addressed by the management of G3 THEATRES LLP.
-<br /><br />
-<span style={{fontWeight:'500'}}>8. protection & privacy policy</span><br />
-To protect your personal information, we take reasonable precautions and follow industry best practices to make sure it is not inappropriately lost, misused, accessed, disclosed, altered or destroyed.
-All personal and payment information provided during the ordering process is handled securely and used solely for the purpose of completing transactions and improving user experience.
-<br /><br />
-<span style={{fontWeight:'500'}}>9. Refund and Cancellation Policy</span><br />
-Once an order is placed, it cannot be canceled or refunded.
-<br /><br />
-<span style={{fontWeight:'500'}}>10. Taxes and Fees</span><br />
-Any additional taxes or fees applicable at the time of purchase will be clearly indicated in your order summary before checkout.
-<br /><br />
-<span style={{fontWeight:'500'}}>11. Dispute Resolution</span><br />
-For any payment disputes, quality concerns, or queries, please contact our support team. We strive to address all concerns promptly.
-<br /><br />
-<span style={{fontWeight:'500'}}>12. changes to this privacy policy</span><br />
-We reserve the right to modify this privacy policy at any time, so please review it frequently. Changes and clarifications will take effect immediately upon their posting on the website. If we make material changes to this policy, we will notify you here that it has been updated, so that you are aware of what information we collect, how we use it, and under what circumstances, if any, we use and/or disclose it.
-If our store is acquired or merged with another company, your information may be transferred to the new owners so that we may continue to sell products to you.
-<br /><br />
-<span style={{fontWeight:'500'}}>13. Acknowledgment</span><br />
-By placing an order and completing the payment, you acknowledge and accept these terms and conditions.
+{/* Modal Content with Scroll */}
+<div className="p-4 overflow-y-auto max-h-[60vh]">
+  {/* Replace with your actual terms and conditions */}
+  <p className="text-gray-600 text-sm">
+    <span style={{ fontWeight: 'bold' }}>OVERVIEW </span>
+    <br /><br />
+    This website is operated by TAPONBYTES COMMUNICATIONS PRIVATE LIMITED. Throughout the site, the terms “we”, “us” and “our” refer to TAPONBYTES COMMUNICATIONS PRIVATE LIMITED, which is a third party managing these processes on behalf of G3 THEATRES LLP. TAPONBYTES COMMUNICATIONS PRIVATE LIMITED offers this website, including all information, tools, and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies, and notices stated here.
+    <br />By visiting our site and/or purchasing something from us, you engage in our “Service” and agree to be bound by the following Terms and Conditions. These Terms and Conditions apply to all users of the site, including without limitation users who are browsers, customers, merchants, and/or contributors of content.
+    <br />
+    <ul>
+      <li>Please read these Terms and Conditions carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms and Conditions.</li>
+      <li>If you do not agree to all the terms and conditions of this agreement, then you may not access the payment or use any services.</li>
+      <li>Any new features or tools which are added to the current store shall also be subject to the terms and conditions. You can review the most current version of the Terms and Conditions at any time on this page.</li>
+      <li>We reserve the right to update, change, or replace any part of these Terms and Conditions by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes.</li>
+      <li>Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.</li>
+    </ul>
+    <br />
+    <span style={{ fontWeight: 'bold' }}>Terms and Conditions</span>
+  </p>
+  <p className="text-gray-600 text-sm mt-4">
+    <span style={{ fontWeight: '500' }}>1. Pricing Policy</span><br />
+    All prices displayed on the website are exclusive of applicable taxes and fees. The total bill will include the following charges:
+    <ul>
+      <li>Handling Fee: 4% (charged by us as the third party responsible for website development, maintenance, and account handling).</li>
+    </ul>
+    <br />
+    <span style={{ fontWeight: '500' }}>2. What We Do with Your Information</span><br />
+    When you purchase something through this platform, as part of the process, we collect personal information such as your name, phone number, seat number, and screen. This information is used solely to facilitate your order and ensure efficient handling. Note that we are a third party managing these processes on behalf of G3 THEATRES LLP.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>3. Payee Information</span><br />
+    All payments made on this platform are directed to G3 THEATRES LLP. We act only as a service provider for facilitating these transactions.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>4. Payment Methods</span><br />
+    Payments are processed through Phonepe. Neither we nor Phonepe store your card data on their servers. Payment data is encrypted through the Payment Card Industry Data Security Standard (PCI-DSS) during processing. Your purchase transaction data is used only as necessary to complete the transaction and is not retained thereafter.
+    <br />
+    Our payment gateway adheres to PCI-DSS standards managed by the PCI Security Standards Council, which includes brands like Visa, MasterCard, and American Express. These standards ensure secure handling of credit card information by our platform and service providers.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>5. Transaction Confirmation</span><br />
+    After a successful transaction, you will receive an order and payment confirmation on the webpage. Please ensure that the details provided are accurate.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>6. Food Items: Health and Safety</span><br />
+    All food items listed on the website adhere to strict health and safety standards. Food is sourced from trusted suppliers to ensure quality and compliance with regulations. Customers with specific allergies or dietary restrictions are advised to review item details carefully before placing an order.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>7. Ownership of Food Items</span><br />
+    The ownership and responsibility for the preparation and quality of food items lie solely with G3 THEATRES LLP or their associated partners. Any issues related to food preparation or quality should be addressed directly with the management of G3 THEATRES LLP.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>8. Privacy and Protection of Information</span><br />
+    To protect your personal information, we implement reasonable precautions and industry best practices to ensure it is not inappropriately lost, misused, accessed, disclosed, altered, or destroyed. All personal and payment information provided during the ordering process is handled securely and used solely for completing transactions and improving the user experience. As a third party, we act as custodians of this data for website functionality and account handling purposes.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>9. Refund and Cancellation Policy</span><br />
+    Once an order is placed, it cannot be canceled or refunded.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>10. Taxes and Fees</span><br />
+    Any additional taxes or fees applicable at the time of purchase will be clearly indicated in your order summary before checkout.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>11. Dispute Resolution</span><br />
+    For any payment disputes, quality concerns, or queries, please contact the support team. We strive to address all concerns promptly. Note that we act only as facilitators and may redirect specific queries to G3 THEATRES LLP as needed.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>12. Changes to This Privacy Policy</span><br />
+    We reserve the right to modify this privacy policy at any time. Changes and clarifications take effect immediately upon posting on the website. If material changes are made, we will notify you here. If the platform is acquired or merged with another company, your information may be transferred to ensure continuity of services.
+    <br /><br />
+    <span style={{ fontWeight: '500' }}>13. Acknowledgment</span><br />
+    By placing an order and completing the payment, you acknowledge and accept these terms and conditions, including the role of the third-party service provider managing website development, maintenance, and account handling.
+    <br /><br />
+    Contact: 9346917375 <br />
+    Email: harigepl@gmail.com <br />
+    Address: Raj Yuvraj(G3 THEATRES), Andra Ratna Road, Gandhi Nagar, Vijayawada, Andhra Pradesh, 520010, India
+    <br />
+  </p>
+</div>
 
-<br /><br />
-Contact: 9346917375 <br />
-Email: harigepl@gmail.com <br />
-Address: Raj Yuvraj(G3 THEATRES),Andra Ratna Road ,gandi nagar,Vijayawada, andra pradesh,520010,india
-<br />
-
-
-
-
-
-
-              </p>
-              {/* Add more content as needed */}
-            </div>
 
             {/* Modal Footer */}
             <div className="border-t p-4 flex justify-end">
