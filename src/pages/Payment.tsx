@@ -201,9 +201,9 @@ const  user={items: cart, total: totalAmount, customerName: name, customerPhone:
 
               <div>
                 <p style={{ fontWeight: 'bold', color: 'red', textAlign: 'center' }}>
-                  <span style={{ fontWeight: 'bold', color: 'darkcyan'}}> Wait until your </span>
+                  <span style={{ fontWeight: 'bold', color: 'black'}}> Wait until your </span>
                   order is confirmed  
-                  <span style={{ fontWeight: 'bold', color: 'darkcyan'}}> after </span>
+                  <span style={{ fontWeight: 'bold', color: 'black'}}> after </span>
                   payment<div></div>
                    Don’t reload/close this page while processing
                 </p>
