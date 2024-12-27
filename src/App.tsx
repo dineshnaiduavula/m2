@@ -4,9 +4,11 @@ import { Toaster } from 'react-hot-toast';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Cart from './pages/Cart';
+import TermsAndConditions from './pages/TermsAndConditions'
 import Payment from './pages/Payment';
 import Order from './pages/order'
 import OrderConfirmation from './pages/OrderConfirmation';
+import PrivacyPolicy from './pages/PrivacyPolicy'
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import { useStore } from './store/useStore';
@@ -48,6 +50,26 @@ function App() {
             </PrivateRoute>
           }
         />
+
+<Route
+          path="/TermsAndConditions"
+          element={
+            <PrivateRoute>
+              <TermsAndConditions />
+            </PrivateRoute>
+          }
+        />
+
+<Route
+          path="/PrivacyPolicy"
+          element={
+            <PrivateRoute>
+              <PrivacyPolicy />
+            </PrivateRoute>
+          }
+        />
+
+
         <Route
           path="/payment"
           element={
