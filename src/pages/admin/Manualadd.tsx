@@ -10,7 +10,6 @@ function Manualadd() {
     phone: '',
     seatNumber: '',
     screen: '',
-    paymentTotal: 0,
     items: [] as Array<{ name: string; quantity: number; price: number }>
   };
 
@@ -22,6 +21,12 @@ function Manualadd() {
 
   const [formData, setFormData] = useState(initialFormData);
   const [currentItem, setCurrentItem] = useState(initialItem);
+  const calculateTotal = () => {
+    const subtotal = formData.items.reduce((total, item) => total + item.quantity * item.price, 0);
+    const totalWithSurcharge = subtotal * 1.04; // Add 4% surcharge
+    return parseFloat(totalWithSurcharge.toFixed(2)); // Convert to a float with 2 decimal places
+  };
+  
 
   const handleAddItem = () => {
     if (!currentItem.name || currentItem.quantity <= 0 || currentItem.price <= 0) {
@@ -62,7 +67,7 @@ function Manualadd() {
 
     await addDoc(collection(db, 'orders'), {
       items: formData.items,
-      total: formData.paymentTotal,
+      total: calculateTotal(),
       customerName: formData.name,
       customerPhone: formData.phone,
       seatNumber: formData.seatNumber,
@@ -78,7 +83,7 @@ function Manualadd() {
 
     const isPhoneNumberValid = /^\d{10}$/.test(formData.phone);
 
-    if (!formData.name || !formData.phone || !formData.seatNumber || !formData.screen || formData.paymentTotal <= 0) {
+    if (!formData.name || !formData.phone || !formData.seatNumber || !formData.screen) {
       toast.error('Please fill in all fields');
       return;
     }
@@ -157,106 +162,55 @@ function Manualadd() {
           />
         </div>
 
-{/* Items Section */}
-<div>
-  <label className="block text-sm font-medium text-gray-700">Items</label>
-  <div className="flex space-x-2">
-    <div className="flex-1">
-      <label className="block text-sm font-medium text-gray-700">Item Name</label>
-      <input
-        type="text"
-        value={currentItem.name}
-        onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}
-        placeholder="Item Name"
-        className="block w-full px-3 py-2 border border-gray-300 rounded-md"
-      />
-    </div>
-    <div className="flex-1">
-      <label className="block text-sm font-medium text-gray-700">Quantity</label>
-      <input
-        type="number"
-        value={currentItem.quantity}
-        onChange={(e) => setCurrentItem({ ...currentItem, quantity: Number(e.target.value) })}
-        placeholder="Quantity"
-        className="block w-full px-3 py-2 border border-gray-300 rounded-md"
-      />
-    </div>
-    <div className="flex-1">
-      <label className="block text-sm font-medium text-gray-700">Price</label>
-      <input
-        type="number"
-        value={currentItem.price}
-        onChange={(e) => setCurrentItem({ ...currentItem, price: Number(e.target.value) })}
-        placeholder="Price"
-        className="block w-full px-3 py-2 border border-gray-300 rounded-md"
-      />
-    </div>
-    <div className="flex-shrink-0">
-      <button
-        type="button"
-        onClick={handleAddItem}
-        className="mt-5 px-4 py-2 bg-[#fe0002] text-white rounded-md"
-      >
-        Add Item
-      </button>
-    </div>
-  </div>
-  <ul>
-    {formData.items.map((item, index) => (
-      <li key={index} className="flex justify-between items-center">
-        <span>
-          {item.name} - {item.quantity} @ ${item.price}
-        </span>
-        <button
-          type="button"
-          onClick={() => handleRemoveItem(index)}
-          className="px-2 py-1 bg-gray-500 text-white rounded-md"
-        >
-          Remove
-        </button>
-      </li>
-    ))}
-  </ul>
-</div>
-
-        {/* Items Section
+        {/* Items Section */}
         <div>
           <label className="block text-sm font-medium text-gray-700">Items</label>
           <div className="flex space-x-2">
-            <input
-              type="text"
-              value={currentItem.name}
-              onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}
-              placeholder="Item Name"
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md"
-            />
-            <input
-              type="number"
-              value={currentItem.quantity}
-              onChange={(e) => setCurrentItem({ ...currentItem, quantity: Number(e.target.value) })}
-              placeholder="Quantity"
-              className="block w-1/3 px-3 py-2 border border-gray-300 rounded-md"
-            />
-            <input
-              type="number"
-              value={currentItem.price}
-              onChange={(e) => setCurrentItem({ ...currentItem, price: Number(e.target.value) })}
-              placeholder="Price"
-              className="block w-1/3 px-3 py-2 border border-gray-300 rounded-md"
-            />
-            <button
-              type="button"
-              onClick={handleAddItem}
-              className="px-4 py-2 bg-[#fe0002] text-white rounded-md"
-            >
-              Add Item
-            </button>
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700">Item Name</label>
+              <input
+                type="text"
+                value={currentItem.name}
+                onChange={(e) => setCurrentItem({ ...currentItem, name: e.target.value })}
+                placeholder="Item Name"
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700">Quantity</label>
+              <input
+                type="number"
+                value={currentItem.quantity}
+                onChange={(e) => setCurrentItem({ ...currentItem, quantity: Number(e.target.value) })}
+                placeholder="Quantity"
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-700">Price</label>
+              <input
+                type="number"
+                value={currentItem.price}
+                onChange={(e) => setCurrentItem({ ...currentItem, price: Number(e.target.value) })}
+                placeholder="Price"
+                className="block w-full px-3 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+            <div className="flex-shrink-0">
+              <button
+                type="button"
+                onClick={handleAddItem}
+                className="mt-5 px-4 py-2 bg-[#fe0002] text-white rounded-md"
+              >
+                Add Item
+              </button>
+            </div>
           </div>
           <ul>
             {formData.items.map((item, index) => (
               <li key={index} className="flex justify-between items-center">
                 <span>
-                  {item.name} - {item.quantity} @ ${item.price}
+                  {item.name} - {item.quantity} - {item.price}
                 </span>
                 <button
                   type="button"
@@ -268,17 +222,14 @@ function Manualadd() {
               </li>
             ))}
           </ul>
-        </div> */}
+        </div>
 
-        {/* Payment Total Field */}
+        {/* Display Total */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Payment Total</label>
-          <input
-            type="number"
-            value={formData.paymentTotal}
-            onChange={(e) => setFormData({ ...formData, paymentTotal: parseFloat(e.target.value) })}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
+          <label className="block text-sm font-medium text-gray-700">Total Payment (4% Surcharge)</label>
+          <p className="mt-1 px-3 py-2 border border-gray-300 rounded-md bg-gray-100">
+            {calculateTotal()}
+          </p>
         </div>
 
         {/* Submit Button */}
