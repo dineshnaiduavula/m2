@@ -2,14 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../store/useStore';
 import { useMenuStore } from '../store/menuStore';
-import { usePaymentStore } from '../store/paymentStore';
 import { ArrowLeft, CreditCard } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { collection, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
-import LoadingSpinner from '../components/LoadingSpinner';
 
 declare global {
   interface Window {
@@ -17,14 +15,11 @@ declare global {
   }
 }
 const Payment = () => {
-  const [paymentStatus, setPaymentStatus] = useState<string | null>(null); // State to track payment status
-    const [loading, setLoading] = useState(false); // State for loading indicator
   
   const navigate = useNavigate();
-  const { cart, name, phone, seatNumber, clearCart, removeFromCart, screen } = useStore();
+  const { cart, name, phone, seatNumber, clearCart, screen } = useStore();
   const { items: menuItems, startRealTimeUpdates } = useMenuStore();
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const unsubscribe = startRealTimeUpdates();

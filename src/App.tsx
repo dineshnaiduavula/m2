@@ -13,7 +13,6 @@ import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import { useStore } from './store/useStore';
 import { useAuthStore } from './store/authStore';
-import PaymentSuccess from './pages/PaymentSuccess';
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const isLoggedIn = useStore((state) => state.isLoggedIn);
   return isLoggedIn ? <>{children}</> : <Navigate to="/" />;
@@ -30,7 +29,6 @@ function App() {
       <Toaster position="top-center" />
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/history" element={<Order/>} />
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/admin/login" element={<AdminLogin />} />
